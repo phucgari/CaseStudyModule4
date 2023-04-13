@@ -1,4 +1,4 @@
 package com.casestudymodule4.service;
 
-public class IGeneralService {
+public interface IGeneralService<T> {
 }
