@@ -11,7 +11,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @ManyToOne
     private User user;
     @Enumerated(EnumType.STRING)
     @NaturalId
