@@ -4,19 +4,18 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Status {
+public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private enum name{
-        Free, Orderd, Fixing
+    private String src;
+
+    public Picture() {
     }
 
-    public Status() {
-    }
-
-    public Status(Long id) {
+    public Picture(Long id, String src) {
         this.id = id;
+        this.src = src;
     }
 
     public Long getId() {
@@ -25,5 +24,13 @@ public class Status {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
     }
 }
