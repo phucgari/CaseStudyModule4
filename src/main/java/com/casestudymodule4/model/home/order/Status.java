@@ -1,5 +1,7 @@
 package com.casestudymodule4.model.home.order;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,7 +10,10 @@ public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private enum name{
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    private StatusName name;
+    private enum StatusName{
         Free, Orderd, Fixing
     }
 
