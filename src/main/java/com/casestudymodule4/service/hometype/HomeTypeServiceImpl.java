@@ -1,7 +1,7 @@
 package com.casestudymodule4.service.hometype;
 
 import com.casestudymodule4.model.home.type.HomeType;
-import com.casestudymodule4.repository.IHomeTypeRepository;
+import com.casestudymodule4.repository.home.IHomeTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
