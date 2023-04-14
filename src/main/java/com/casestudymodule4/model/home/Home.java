@@ -32,9 +32,11 @@ public class Home {
     @ManyToOne
     private User owner;
 
-    @ManyToOne
+    @OneToMany
     private List<Order> orderList;
+    @OneToMany
     private Set<Rating> ratings;
+    @OneToMany
     private Set<Comment> comments;
 
     public Home() {
