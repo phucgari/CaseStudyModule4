@@ -1,7 +1,7 @@
 package com.casestudymodule4.service.home;
 
 import com.casestudymodule4.model.home.Home;
-import com.casestudymodule4.repository.IHomeRepository;
+import com.casestudymodule4.repository.home.IHomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

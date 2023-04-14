@@ -1,7 +1,7 @@
 package com.casestudymodule4.service.homeday;
 
 import com.casestudymodule4.model.home.order.HomeDay;
-import com.casestudymodule4.repository.IHomeDayRepository;
+import com.casestudymodule4.repository.home.IHomeDayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

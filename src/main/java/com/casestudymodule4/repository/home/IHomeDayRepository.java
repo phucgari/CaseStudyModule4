@@ -1,4 +1,4 @@
-package com.casestudymodule4.repository;
+package com.casestudymodule4.repository.home;
 
 import com.casestudymodule4.model.home.order.HomeDay;
 import org.springframework.data.jpa.repository.JpaRepository;
