@@ -1,5 +1,6 @@
 package com.casestudymodule4.controller.order;
 
+import com.casestudymodule4.model.DTO.MonthMoneyTable;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.service.order.OrderService;
@@ -44,5 +45,9 @@ public class OrderController {
     @GetMapping("user/{user}")
     public ResponseEntity<Iterable<Order>> findByOrderer(@PathVariable User user){
         return ResponseEntity.ok(service.findAllByOrderer(user));
+    }
+    @GetMapping("owner/{user}")
+    public ResponseEntity<Iterable<MonthMoneyTable>> printMonthMoneyTableByOwner(@PathVariable User user){
+        return ResponseEntity.ok(service.printMonthMoneyTableByOwner(user));
     }
 }
