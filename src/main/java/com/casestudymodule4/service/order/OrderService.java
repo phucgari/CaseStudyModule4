@@ -1,12 +1,14 @@
 package com.casestudymodule4.service.order;
 
 import com.casestudymodule4.model.DTO.MonthMoneyTable;
+import com.casestudymodule4.model.home.order.HomeDay;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -40,5 +42,15 @@ public class OrderService implements IOderService{
     @Override
     public Iterable<MonthMoneyTable> printMonthMoneyTableByOwner(User user) {
         return repository.printMonthMoneyTableByOwner(user.getId());
+    }
+
+    @Override
+    public boolean removeOrderBefore1Day(Order order) {
+//        for (HomeDay day :
+//                order.getOrderDay()) {
+//            if(day.getDay().isBefore(LocalDate.now().plusDays(1)))return false;
+//        }
+//        repository.delete(order);
+        return true;
     }
 }
