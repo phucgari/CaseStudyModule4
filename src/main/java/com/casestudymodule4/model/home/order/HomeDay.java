@@ -10,6 +10,7 @@ public class HomeDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "status_id")
     private Status status;
     private LocalDate day;
 

@@ -1,13 +1,13 @@
 package com.casestudymodule4.controller.order;
 
 import com.casestudymodule4.model.home.order.Order;
+import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -40,5 +40,9 @@ public class OrderController {
         if (optionalOrder.isEmpty())return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         service.remove(id);
         return ResponseEntity.ok(optionalOrder.get());
+    }
+    @GetMapping("user/{user}")
+    public ResponseEntity<Iterable<Order>> findByOrderer(@PathVariable User user){
+        return ResponseEntity.ok(service.findAllByOrderer(user));
     }
 }

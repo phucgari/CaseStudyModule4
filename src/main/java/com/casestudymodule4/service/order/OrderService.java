@@ -1,6 +1,7 @@
 package com.casestudymodule4.service.order;
 
 import com.casestudymodule4.model.home.order.Order;
+import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.repository.IOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class OrderService implements IOderService{
     @Override
     public void remove(Long id) {
         repository.deleteById(id);
+    }
+    @Override
+    public Iterable<Order> findAllByOrderer(User user){
+        return repository.findAllByOrderer(user);
     }
 }
