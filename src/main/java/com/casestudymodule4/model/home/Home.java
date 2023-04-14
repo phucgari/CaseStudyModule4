@@ -30,13 +30,17 @@ public class Home {
     @JoinColumn(name = "picture_id")
     private Set<Picture> pictures;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User owner;
 
     @OneToMany
+    @JoinColumn(name = "order_id")
     private List<Order> orderList;
     @OneToMany
+    @JoinColumn(name="ratings_id")
     private Set<Rating> ratings;
     @OneToMany
+    @JoinColumn(name = "comments_id")
     private Set<Comment> comments;
 
     public Home() {
