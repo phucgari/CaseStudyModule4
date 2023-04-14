@@ -1,4 +1,4 @@
-package com.casestudymodule4.model;
+package com.casestudymodule4.model.picture;
 
 import javax.persistence.*;
 
