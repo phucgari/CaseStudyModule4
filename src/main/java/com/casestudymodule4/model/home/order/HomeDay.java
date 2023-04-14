@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "homeDays")
 public class HomeDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

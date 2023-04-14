@@ -5,7 +5,7 @@ import com.casestudymodule4.model.user.User;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
