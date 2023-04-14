@@ -12,12 +12,17 @@ public class Status {
     private Long id;
     @Enumerated(EnumType.STRING)
     @NaturalId
-    private StatusName name;
-    private enum StatusName{
+    private StatusType name;
+    public enum StatusType{
         Free, Ordered, Fixing
     }
 
     public Status() {
+    }
+
+    public Status(Long id, StatusType name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Status(Long id) {
@@ -30,5 +35,13 @@ public class Status {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public StatusType getName() {
+        return name;
+    }
+
+    public void setName(StatusType name) {
+        this.name = name;
     }
 }

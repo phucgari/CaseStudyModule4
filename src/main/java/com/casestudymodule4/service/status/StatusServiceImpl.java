@@ -31,4 +31,17 @@ public class StatusServiceImpl implements IStatusService {
     public void remove(Long id) {
         iStatusRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Status> findByName(String name) {
+        switch (name) {
+            case "free":
+                return iStatusRepository.findByName(Status.StatusType.Free);
+            case "ordered":
+                return iStatusRepository.findByName(Status.StatusType.Ordered);
+            case "fixing":
+                return iStatusRepository.findByName(Status.StatusType.Fixing);
+        }
+        throw new RuntimeException("invalid status");
+    }
 }

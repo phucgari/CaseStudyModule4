@@ -1,7 +1,6 @@
-package com.casestudymodule4.controller;
+package com.casestudymodule4.controller.home;
 
 import com.casestudymodule4.model.home.type.HomeType;
-import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.service.hometype.IHomeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +27,7 @@ public class HomeTypeController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<HomeType> updateHomeType( @RequestBody HomeType homeType) {
+    public ResponseEntity<HomeType> updateHomeType(@RequestBody HomeType homeType) {
         this.iHomeTypeService.save(homeType);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -37,5 +36,10 @@ public class HomeTypeController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         this.iHomeTypeService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("findByName/{name}")
+    public ResponseEntity<Optional<HomeType>> findByName(@PathVariable String name) {
+        return new ResponseEntity<>(this.iHomeTypeService.findByName(name), HttpStatus.OK);
     }
 }

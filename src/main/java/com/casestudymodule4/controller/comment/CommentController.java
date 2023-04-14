@@ -1,4 +1,4 @@
-package com.casestudymodule4.controller;
+package com.casestudymodule4.controller.comment;
 
 import com.casestudymodule4.model.home.rating.Comment;
 import com.casestudymodule4.model.picture.Picture;

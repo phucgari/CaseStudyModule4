@@ -12,9 +12,33 @@ public class HomeType {
     private Long id;
     @Enumerated(EnumType.STRING)
     @NaturalId
-    private Name name;
+    private TypeName name;
 
-    private enum Name {
+    public enum TypeName {
         VILLA, APARTMENT, MOTEL;
+    }
+
+    public HomeType() {
+    }
+
+    public HomeType(Long id, TypeName name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TypeName getName() {
+        return name;
+    }
+
+    public void setName(TypeName name) {
+        this.name = name;
     }
 }
