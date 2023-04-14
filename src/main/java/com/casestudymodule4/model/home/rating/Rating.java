@@ -46,9 +46,8 @@ public class Rating {
         this.user = user;
     }
 
-    public int getPoint() {
-        if (point == null) return 0;
-        return point.getPoint();
+    public RatingPoint getPoint() {
+        return point;
     }
 
     public void setPoint(int point) {
