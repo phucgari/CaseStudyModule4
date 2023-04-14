@@ -27,20 +27,20 @@ public class Home {
     private String description;
     private Double price;
     @OneToMany
-    @JoinColumn(name = "picture_id")
+    @JoinColumn(name = "home_id")
     private Set<Picture> pictures;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
 
     @OneToMany
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "home_id")
     private List<Order> orderList;
     @OneToMany
-    @JoinColumn(name="ratings_id")
+    @JoinColumn(name="home_id")
     private Set<Rating> ratings;
     @OneToMany
-    @JoinColumn(name = "comments_id")
+    @JoinColumn(name = "home_id")
     private Set<Comment> comments;
 
     public Home() {

@@ -1,5 +1,6 @@
 package com.casestudymodule4.service.order;
 
+import com.casestudymodule4.model.DTO.MonthMoneyTable;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.repository.IOrderRepository;
@@ -34,5 +35,10 @@ public class OrderService implements IOderService{
     @Override
     public Iterable<Order> findAllByOrderer(User user){
         return repository.findAllByOrderer(user);
+    }
+
+    @Override
+    public Iterable<MonthMoneyTable> printMonthMoneyTableByOwner(User user) {
+        return repository.printMonthMoneyTableByOwner(user.getId());
     }
 }

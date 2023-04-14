@@ -1,6 +1,7 @@
 package com.casestudymodule4.model.home.order;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +13,7 @@ public class HomeDay {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
+    @NotBlank
     private LocalDate day;
 
     public HomeDay() {
