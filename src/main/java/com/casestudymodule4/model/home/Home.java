@@ -1,6 +1,6 @@
 package com.casestudymodule4.model.home;
 
-import com.casestudymodule4.model.Picture;
+import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.home.rating.Comment;
 import com.casestudymodule4.model.home.rating.Rating;
