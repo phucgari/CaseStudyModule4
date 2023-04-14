@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
-public class HomeTypeService implements   IHomeTypeService{
+public class HomeTypeServiceImpl implements   IHomeTypeService{
     @Autowired
     private IHomeTypeRepository iHomeTypeRepository;
     @Override
