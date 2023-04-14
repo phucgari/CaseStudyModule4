@@ -5,7 +5,7 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "homeTypes")
 public class HomeType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

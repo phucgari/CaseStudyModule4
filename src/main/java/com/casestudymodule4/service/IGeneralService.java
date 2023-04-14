@@ -1,7 +1,6 @@
 package com.casestudymodule4.service;
 
 import java.util.Optional;
-
 public interface IGeneralService<T> {
     Iterable<T> findAll();
 

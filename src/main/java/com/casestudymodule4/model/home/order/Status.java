@@ -5,7 +5,7 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name ="status")
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
