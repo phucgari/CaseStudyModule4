@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class HomeService implements IHomeService {
+public class HomeServiceImpl implements IHomeService {
     @Autowired
     private IHomeRepository iHomeRepository;
 
