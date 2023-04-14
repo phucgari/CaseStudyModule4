@@ -39,8 +39,8 @@ public class OrderController {
     public ResponseEntity<Order> deleteOrder(@PathVariable Long id){
         Optional<Order> optionalOrder=service.findById(id);
         if (optionalOrder.isEmpty())return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        service.remove(id);
-        return ResponseEntity.ok(optionalOrder.get());
+        if(service.removeOrderBefore1Day(optionalOrder.get()))return ResponseEntity.ok(optionalOrder.get());
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
     @GetMapping("user/{user}")
     public ResponseEntity<Iterable<Order>> findByOrderer(@PathVariable User user){
@@ -49,5 +49,11 @@ public class OrderController {
     @GetMapping("owner/{user}")
     public ResponseEntity<Iterable<MonthMoneyTable>> printMonthMoneyTableByOwner(@PathVariable User user){
         return ResponseEntity.ok(service.printMonthMoneyTableByOwner(user));
+    }
+    @PostMapping("checkin/{order}")
+    public ResponseEntity<Order>checkIn(@PathVariable Order order){
+        if(order.isCheckedIn())return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        order.setCheckedIn(true);
+        return ResponseEntity.ok(service.save(order));
     }
 }
