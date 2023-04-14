@@ -14,7 +14,7 @@ public class Status {
     @NaturalId
     private StatusName name;
     private enum StatusName{
-        Free, Orderd, Fixing
+        Free, Ordered, Fixing
     }
 
     public Status() {

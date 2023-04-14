@@ -10,8 +10,8 @@ public class HomeDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-   private Status status;
-   private LocalDate day;
+    private Status status;
+    private LocalDate day;
 
     public HomeDay() {
     }
@@ -22,7 +22,7 @@ public class HomeDay {
         this.day = day;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
