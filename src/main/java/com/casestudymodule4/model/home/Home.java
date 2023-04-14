@@ -1,5 +1,6 @@
 package com.casestudymodule4.model.home;
 
+import com.casestudymodule4.model.home.order.HomeDay;
 import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.home.rating.Comment;
@@ -32,7 +33,9 @@ public class Home {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
-
+    @OneToMany
+    @JoinColumn(name="home_id")
+    private Set<HomeDay> orderDay;
     @OneToMany
     @JoinColumn(name = "home_id")
     private List<Order> orderList;
