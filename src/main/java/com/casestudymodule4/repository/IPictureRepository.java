@@ -1,6 +1,6 @@
 package com.casestudymodule4.repository;
 
-import com.casestudymodule4.model.Picture;
+import com.casestudymodule4.model.picture.Picture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
