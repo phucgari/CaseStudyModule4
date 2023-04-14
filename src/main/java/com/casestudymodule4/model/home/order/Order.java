@@ -18,6 +18,18 @@ public class Order {
     @ManyToOne
     @JoinColumn(name ="user_id")
     private User orderer;
+    @OneToMany
+    @JoinColumn(name="oder_id")
+    private Set<HomeDay> homeDays;
+
+    public Set<HomeDay> getHomeDays() {
+        return homeDays;
+    }
+
+    public void setHomeDays(Set<HomeDay> homeDays) {
+        this.homeDays = homeDays;
+    }
+
     private boolean checkedIn;
 
     public boolean isCheckedIn() {
