@@ -36,15 +36,12 @@ public class User {
     @Size(min = 6, max = 8)
     private String password;
 
-    @NotBlank
     @Size(max = 50)
     private String email;
 
-    @NotBlank
     @Size(min = 10, max = 15)
     private String phone;
 
-    @NotBlank
     private String address;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -66,6 +63,24 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.roles = roles;
+    }
+
+    public User(String avatar,
+                @NotBlank
+                @Size(min = 6, max = 50) String fullName,
+                @NotBlank
+                @Size(min = 6, max = 50) String username,
+                @NotBlank
+                @Size(min = 6, max = 100) String encode,
+                @Size(max = 50) String email,
+                @Size(min = 10, max = 15) String phone,
+                String address
+    ) {
+        this.avatar = avatar;
+        this.fullName = fullName;
+        this.username = username;
+        this.email = email;
+        this.password = encode;
     }
 
     public Long getId() {
