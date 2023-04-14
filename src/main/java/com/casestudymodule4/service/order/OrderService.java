@@ -46,11 +46,11 @@ public class OrderService implements IOderService{
 
     @Override
     public boolean removeOrderBefore1Day(Order order) {
-//        for (HomeDay day :
-//                order.getOrderDay()) {
-//            if(day.getDay().isBefore(LocalDate.now().plusDays(1)))return false;
-//        }
-//        repository.delete(order);
+        for (HomeDay day :
+                order.getHomeDays()) {
+            if(day.getDay().isBefore(LocalDate.now().plusDays(1)))return false;
+        }
+        repository.delete(order);
         return true;
     }
 }

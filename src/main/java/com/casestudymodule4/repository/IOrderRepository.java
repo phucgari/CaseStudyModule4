@@ -13,8 +13,7 @@ public interface IOrderRepository extends JpaRepository<Order,Long> {
     @Query(nativeQuery = true,
             value = "select Count(Home_days)*homes.price as money,month " +
                     "from home_days " +
-                    "join order on order.id=home_days.order_id " +
-                    "join homes on order.home_id=homes.id " +
+                    "join homes on home_day.home_id=homes.id " +
                     "join users on users.id=home.user_id " +
                     "GROUP BY DATE_FORMAT(day,'%Y-%m') as month where users.id=?1"
     )
