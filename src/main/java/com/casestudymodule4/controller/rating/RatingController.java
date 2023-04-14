@@ -1,4 +1,4 @@
-package com.casestudymodule4.controller;
+package com.casestudymodule4.controller.rating;
 
 import com.casestudymodule4.model.home.Home;
 import com.casestudymodule4.model.home.rating.Rating;

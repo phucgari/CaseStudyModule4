@@ -1,4 +1,4 @@
-package com.casestudymodule4.controller;
+package com.casestudymodule4.controller.picture;
 
 import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.service.picture.IPictureService;
