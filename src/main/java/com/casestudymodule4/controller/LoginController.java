@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -44,10 +46,6 @@ public class LoginController {
     public ResponseEntity<?> register(@Valid @RequestBody SignUpForm signUpForm) {
         if (userService.existsByUsername(signUpForm.getUsername())) {
             return new ResponseEntity<>(new ResponseMessage("The username is existed"), HttpStatus.OK);
-        }
-
-        if (userService.existsByEmail(signUpForm.getEmail())) {
-            return new ResponseEntity<>(new ResponseMessage("The email is existed"), HttpStatus.OK);
         }
         User user = new User(signUpForm.getAvatar(), signUpForm.getFullName(),
                             signUpForm.getUsername(), signUpForm.getPassword(),
@@ -77,6 +75,10 @@ public class LoginController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> login(@Valid @RequestBody SignInForm signInForm) {
+        Optional<User> user=userService.findByUsername(signInForm.getUsername());
+        if(user.isEmpty())return new ResponseEntity<>("InvalidUser",HttpStatus.OK);
+        if(!Objects.equals(user.get().getPassword(), signInForm.getPassword()))
+            return new ResponseEntity<>("InvalidPassword",HttpStatus.OK);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInForm.getUsername(), signInForm.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
