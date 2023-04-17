@@ -15,12 +15,30 @@ public class Order {
     private Long id;
     @NotBlank
     private LocalDateTime orderTime;
-    @OneToMany
-    @JoinColumn(name="order_id")
-    private Set<HomeDay> orderDay;
     @ManyToOne
     @JoinColumn(name ="user_id")
     private User orderer;
+    @OneToMany
+    @JoinColumn(name="oder_id")
+    private Set<HomeDay> homeDays;
+
+    public Set<HomeDay> getHomeDays() {
+        return homeDays;
+    }
+
+    public void setHomeDays(Set<HomeDay> homeDays) {
+        this.homeDays = homeDays;
+    }
+
+    private boolean checkedIn;
+
+    public boolean isCheckedIn() {
+        return checkedIn;
+    }
+
+    public void setCheckedIn(boolean checkedIn) {
+        this.checkedIn = checkedIn;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -36,14 +54,6 @@ public class Order {
 
     public void setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public Set<HomeDay> getOrderDay() {
-        return orderDay;
-    }
-
-    public void setOrderDay(Set<HomeDay> orderDay) {
-        this.orderDay = orderDay;
     }
 
     public User getOrderer() {

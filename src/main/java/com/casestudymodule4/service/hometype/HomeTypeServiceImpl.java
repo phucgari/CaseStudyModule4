@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
-public class HomeTypeServiceImpl implements   IHomeTypeService{
+public class HomeTypeServiceImpl implements IHomeTypeService {
     @Autowired
     private IHomeTypeRepository iHomeTypeRepository;
+
     @Override
     public Iterable<HomeType> findAll() {
         return iHomeTypeRepository.findAll();
@@ -28,5 +30,18 @@ public class HomeTypeServiceImpl implements   IHomeTypeService{
     @Override
     public void remove(Long id) {
         iHomeTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<HomeType> findByName(String name) {
+        switch (name) {
+            case "villa":
+                return iHomeTypeRepository.findByName(HomeType.TypeName.VILLA);
+            case "apartment":
+                return iHomeTypeRepository.findByName(HomeType.TypeName.APARTMENT);
+            case "motel":
+                return iHomeTypeRepository.findByName(HomeType.TypeName.MOTEL);
+        }
+        throw new RuntimeException("invalid hometype");
     }
 }

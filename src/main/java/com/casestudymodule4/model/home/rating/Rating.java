@@ -51,24 +51,7 @@ public class Rating {
         return point;
     }
 
-    public void setPoint(int point) {
-        switch (point) {
-            case 1:
-                this.point = RatingPoint.VERYBAD;
-                break;
-            case 2:
-                this.point = RatingPoint.BAD;
-                break;
-            case 3:
-                this.point = RatingPoint.NORMAL;
-                break;
-            case 4:
-                this.point = RatingPoint.GOOD;
-                break;
-            case 5:
-                this.point = RatingPoint.VERYGOOD;
-                break;
-
-        }
+    public void setPoint(RatingPoint point) {
+        this.point = point;
     }
 }

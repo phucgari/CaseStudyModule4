@@ -1,4 +1,4 @@
-package com.casestudymodule4.controller;
+package com.casestudymodule4.controller.home;
 
 import com.casestudymodule4.model.home.order.HomeDay;
 import com.casestudymodule4.model.picture.Picture;

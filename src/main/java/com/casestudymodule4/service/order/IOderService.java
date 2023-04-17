@@ -10,4 +10,6 @@ public interface IOderService extends IGeneralService<Order> {
     Iterable<Order> findAllByOrderer(User user);
 
     Iterable<MonthMoneyTable> printMonthMoneyTableByOwner(User owner);
+
+    boolean removeOrderBefore1Day(Order order);
 }
