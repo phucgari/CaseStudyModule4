@@ -1,5 +1,6 @@
 package com.casestudymodule4.security.principle;
 
+import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class UserPrinciple implements UserDetails {
     private Long id;
-    private String avatar;
+    private Picture avatar;
     private String fullName;
     private String username;
     @JsonIgnore
@@ -27,7 +28,7 @@ public class UserPrinciple implements UserDetails {
     public UserPrinciple() {
     }
 
-    public UserPrinciple(Long id, String avatar, String fullName, String username, String password, String email,
+    public UserPrinciple(Long id, Picture avatar, String fullName, String username, String password, String email,
                          String phone, String address, Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.avatar = avatar;
@@ -48,11 +49,11 @@ public class UserPrinciple implements UserDetails {
         this.id = id;
     }
 
-    public String getAvatar() {
+    public Picture getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Picture avatar) {
         this.avatar = avatar;
     }
 

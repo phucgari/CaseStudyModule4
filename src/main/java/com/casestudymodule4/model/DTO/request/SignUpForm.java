@@ -1,9 +1,11 @@
 package com.casestudymodule4.model.DTO.request;
 
+import com.casestudymodule4.model.picture.Picture;
+
 import java.util.Set;
 
 public class SignUpForm {
-    private String avatar;
+    private Picture avatar;
     private String fullName;
     private String username;
     private String password;
@@ -15,7 +17,7 @@ public class SignUpForm {
     public SignUpForm() {
     }
 
-    public SignUpForm(String avatar, String fullName, String username, String password, String email, String phone, String address, Set<String> roles) {
+    public SignUpForm(Picture avatar, String fullName, String username, String password, String email, String phone, String address, Set<String> roles) {
         this.avatar = avatar;
         this.fullName = fullName;
         this.username = username;
@@ -26,11 +28,11 @@ public class SignUpForm {
         this.roles = roles;
     }
 
-    public String getAvatar() {
+    public Picture getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Picture avatar) {
         this.avatar = avatar;
     }
 
