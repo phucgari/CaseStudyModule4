@@ -5,6 +5,7 @@ import com.casestudymodule4.repository.home.IHomeDayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,10 @@ public class HomeDayServiceImpl implements IHomeDayService {
     @Override
     public void remove(Long id) {
         iHomeDayRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<HomeDay> findByDayAndHomeId(LocalDate date, Long homeId) {
+        return this.iHomeDayRepository.findByDayAndHomeId(date, homeId);
     }
 }

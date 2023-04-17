@@ -178,4 +178,12 @@ public class Home {
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
+
+    public Set<HomeDay> getOrderDay() {
+        return orderDay;
+    }
+
+    public void setOrderDay(Set<HomeDay> orderDay) {
+        this.orderDay = orderDay;
+    }
 }
