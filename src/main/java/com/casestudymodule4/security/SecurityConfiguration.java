@@ -1,4 +1,4 @@
-package com.casestudymodule4.configuration;
+package com.casestudymodule4.security;
 
 import com.casestudymodule4.security.jwt.JwtEntryPoint;
 import com.casestudymodule4.security.jwt.JwtTokenFilter;
@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -29,13 +30,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter();
     }
-
     @Bean
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()

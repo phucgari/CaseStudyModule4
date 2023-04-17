@@ -73,7 +73,7 @@ public class User {
                 @NotBlank
                 @Size(min = 6, max = 32) String username,
                 @NotBlank
-                @Size(min = 6, max = 8) String encode,
+                @Size(min = 6, max = 8) String password,
                 @Size(max = 50) String email,
                 @Size(min = 10, max = 15) String phone,
                 String address
@@ -81,7 +81,7 @@ public class User {
         this.avatar = avatar;
         this.fullName = fullName;
         this.username = username;
-        this.password = encode;
+        this.password = password;
         this.email = email;
         this.phone = phone;
         this.address = address;
