@@ -35,9 +35,6 @@ public class LoginController {
     private IRoleService roleService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -53,7 +50,7 @@ public class LoginController {
             return new ResponseEntity<>(new ResponseMessage("The email is existed"), HttpStatus.OK);
         }
         User user = new User(signUpForm.getAvatar(), signUpForm.getFullName(),
-                            signUpForm.getUsername(), passwordEncoder.encode(signUpForm.getPassword()),
+                            signUpForm.getUsername(), signUpForm.getPassword(),
                             signUpForm.getEmail(), signUpForm.getPhone(), signUpForm.getAddress());
         Set<String> stringRoles = signUpForm.getRoles();
         Set<Role> roles = new HashSet<>();
