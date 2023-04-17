@@ -60,11 +60,13 @@ public class LoginController {
                     Role hostRole = roleService.findByName(Role.RoleType.HOST)
                             .orElseThrow(() -> new RuntimeException("Role not found"));
                     roles.add(hostRole);
+                    break;
                 }
                 case "user": {
                     Role userRole = roleService.findByName(Role.RoleType.USER)
                             .orElseThrow(() -> new RuntimeException("Role not found"));
                     roles.add(userRole);
+                    break;
                 }
             }
         });
