@@ -15,7 +15,7 @@ public class HomeType {
     private TypeName name;
 
     public enum TypeName {
-        VILLA, APARTMENT, MOTEL;
+        SingleRoom, DoubleRoom, PresidentRoom, VIPRoom, LuxuryRoom
     }
 
     public HomeType() {
