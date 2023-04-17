@@ -27,7 +27,7 @@ public class CommentController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<Comment> updatePicture( @RequestBody Comment comment) {
+    public ResponseEntity<Comment> updateComment( @RequestBody Comment comment) {
         this.iCommentService.save(comment);
         return new ResponseEntity<>(HttpStatus.OK);
     }

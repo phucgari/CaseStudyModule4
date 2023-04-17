@@ -37,7 +37,6 @@ public class HomeDayController {
         } else {
             this.iHomeDayService.save(homeDay);
             return new ResponseEntity<>(HttpStatus.OK);
-
         }
     }
 
@@ -58,5 +57,4 @@ public class HomeDayController {
             return create(homeDay);
         }
     }
-
 }

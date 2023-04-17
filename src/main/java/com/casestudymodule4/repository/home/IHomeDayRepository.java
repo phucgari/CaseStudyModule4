@@ -10,7 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface IHomeDayRepository extends JpaRepository<HomeDay, Long> {
-
-
     Optional<HomeDay> findByDayAndHomeId(LocalDate day, Long id);
 }
