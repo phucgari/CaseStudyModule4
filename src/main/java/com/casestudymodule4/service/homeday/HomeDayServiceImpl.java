@@ -44,7 +44,7 @@ public class HomeDayServiceImpl implements IHomeDayService {
 
     @Override
 
-    public Optional<HomeDay> findByDayAndHomeId(LocalDate date, Long homeId) {
-        return this.iHomeDayRepository.findByDayAndHomeId(date, homeId);
+    public Optional<HomeDay> findByDayAndHome(LocalDate date, Home home) {
+        return this.iHomeDayRepository.findByDayAndHome(date, home);
     }
 }

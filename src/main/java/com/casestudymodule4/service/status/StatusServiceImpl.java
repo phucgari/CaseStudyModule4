@@ -33,15 +33,7 @@ public class StatusServiceImpl implements IStatusService {
     }
 
     @Override
-    public Optional<Status> findByName(String name) {
-        switch (name) {
-            case "free":
-                return iStatusRepository.findByName(Status.StatusType.FREE);
-            case "ordered":
-                return iStatusRepository.findByName(Status.StatusType.ORDERED);
-            case "fixing":
-                return iStatusRepository.findByName(Status.StatusType.FIXING);
-        }
-        throw new RuntimeException("invalid status");
+    public Optional<Status> findByName(Status.StatusType name) {
+        return iStatusRepository.findByName(name);
     }
 }

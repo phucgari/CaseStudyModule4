@@ -2,12 +2,17 @@ package com.casestudymodule4.controller.home;
 
 import com.casestudymodule4.model.home.Home;
 import com.casestudymodule4.model.home.order.HomeDay;
+import com.casestudymodule4.model.home.order.Status;
+import com.casestudymodule4.service.home.IHomeService;
 import com.casestudymodule4.service.homeday.IHomeDayService;
+import com.casestudymodule4.service.status.IStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
@@ -16,6 +21,10 @@ import java.util.Optional;
 public class HomeDayController {
     @Autowired
     private IHomeDayService iHomeDayService;
+    @Autowired
+    private IHomeService iHomeService;
+    @Autowired
+    private IStatusService iStatusService;
 
     @GetMapping
     public ResponseEntity<Iterable<HomeDay>> findAll(@RequestParam String year,
@@ -36,7 +45,7 @@ public class HomeDayController {
 
     @PutMapping("update")
     public ResponseEntity<HomeDay> update(@RequestBody HomeDay homeDay) {
-        if (homeDay.getId() != null) {
+        if (homeDay.getId() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             this.iHomeDayService.save(homeDay);
@@ -52,12 +61,19 @@ public class HomeDayController {
 
     @PatchMapping
     public ResponseEntity<HomeDay> updateStatusHomeDay(@RequestBody HomeDay homeDay) {
-        Optional<HomeDay> homeDaySearch = this.iHomeDayService.findByDayAndHomeId(homeDay.getDay(), homeDay.getHome().getId());
+        LocalDate day = homeDay.getDay();
+        Long homeId = homeDay.getHome().getId();
+        Optional<Home> optionalHome=iHomeService.findById(homeId);
+        if(optionalHome.isEmpty())return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Home home=optionalHome.get();
+        Optional<HomeDay> homeDaySearch = this.iHomeDayService.findByDayAndHome(day, home);
+        Status status = iStatusService.findByName(homeDay.getStatus().getName()).get();
         if (homeDaySearch.isPresent()) {
             HomeDay updateHomeDay=homeDaySearch.get();
-            updateHomeDay.setStatus(homeDay.getStatus());
+            updateHomeDay.setStatus(status);
             return update(updateHomeDay);
         } else {
+            homeDay.setStatus(status);
             return create(homeDay);
         }
     }

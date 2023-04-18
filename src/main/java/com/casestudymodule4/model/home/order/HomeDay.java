@@ -1,9 +1,12 @@
 package com.casestudymodule4.model.home.order;
 
 import com.casestudymodule4.model.home.Home;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -13,14 +16,17 @@ public class HomeDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "status_id")
     private Status status;
-    @NotBlank
+    @NotNull
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate day;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "home_id")
+    @JsonBackReference
     private Home home;
 
     public HomeDay() {

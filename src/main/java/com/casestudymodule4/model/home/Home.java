@@ -7,6 +7,7 @@ import com.casestudymodule4.model.home.rating.Comment;
 import com.casestudymodule4.model.home.rating.Rating;
 import com.casestudymodule4.model.home.type.HomeType;
 import com.casestudymodule4.model.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,22 +28,23 @@ public class Home {
     private int numberOfBedroom;
     private String description;
     private Double price;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private Set<Picture> pictures;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name="home_id")
+    @JsonManagedReference
     private Set<HomeDay> orderDay;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private List<Order> orderList;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name="home_id")
     private Set<Rating> ratings;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private Set<Comment> comments;
 
