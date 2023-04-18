@@ -1,5 +1,6 @@
 package com.casestudymodule4.controller.home;
 
+import com.casestudymodule4.model.home.Home;
 import com.casestudymodule4.model.home.order.HomeDay;
 import com.casestudymodule4.service.homeday.IHomeDayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/homeday")
 @CrossOrigin("*")
 public class HomeDayController {
     @Autowired
     private IHomeDayService iHomeDayService;
 
     @GetMapping
-    public ResponseEntity<Iterable<HomeDay>> findAll() {
-        return new ResponseEntity<>(this.iHomeDayService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<HomeDay>> findAll(@RequestParam String year,
+                                                     @RequestParam String month,
+                                                     @RequestParam Home home) {
+        return new ResponseEntity<>(iHomeDayService.findAllByDayBetweenAndHome(year,month,home), HttpStatus.OK);
     }
 
     @PostMapping("create")

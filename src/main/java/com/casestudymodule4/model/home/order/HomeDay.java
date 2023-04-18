@@ -17,6 +17,7 @@ public class HomeDay {
     private Status status;
     @NotBlank
     private LocalDate day;
+
     @NotBlank
     @ManyToOne
     @JoinColumn(name = "home_id")

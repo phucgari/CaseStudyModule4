@@ -19,7 +19,7 @@ public class Order {
     @JoinColumn(name ="user_id")
     private User orderer;
     @OneToMany
-    @JoinColumn(name="oder_id")
+    @JoinColumn(name="order_id")
     private Set<HomeDay> homeDays;
 
     public Set<HomeDay> getHomeDays() {
