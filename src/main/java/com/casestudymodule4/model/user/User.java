@@ -1,5 +1,6 @@
 package com.casestudymodule4.model.user;
 
+import com.casestudymodule4.model.picture.Picture;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -12,16 +13,15 @@ import java.util.Set;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
-        }),
-        @UniqueConstraint(columnNames = {
-                "email"})
+        })
 })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String avatar;
+    @OneToOne
+    private Picture avatar;
 
     @NotBlank
     @Size(min = 6, max = 50)
@@ -53,7 +53,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String avatar, String fullName, String username, String password, String email, String phone, String address, Set<Role> roles) {
+    public User(Long id, Picture avatar, String fullName, String username, String password, String email, String phone, String address, Set<Role> roles) {
         this.id = id;
         this.avatar = avatar;
         this.fullName = fullName;
@@ -65,13 +65,13 @@ public class User {
         this.roles = roles;
     }
 
-    public User(String avatar,
+    public User(Picture avatar,
                 @NotBlank
                 @Size(min = 6, max = 50) String fullName,
                 @NotBlank
-                @Size(min = 6, max = 50) String username,
+                @Size(min = 6, max = 32) String username,
                 @NotBlank
-                @Size(min = 6, max = 100) String encode,
+                @Size(min = 6, max = 8) String password,
                 @Size(max = 50) String email,
                 @Size(min = 10, max = 15) String phone,
                 String address
@@ -79,8 +79,10 @@ public class User {
         this.avatar = avatar;
         this.fullName = fullName;
         this.username = username;
+        this.password = password;
         this.email = email;
-        this.password = encode;
+        this.phone = phone;
+        this.address = address;
     }
 
     public Long getId() {
@@ -91,14 +93,14 @@ public class User {
         this.id = id;
     }
 
-    public String getAvatar() {
+    public Picture getAvatar() {
         if (avatar == null) {
-            return "";
+            return new Picture();
         }
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Picture avatar) {
         this.avatar = avatar;
     }
 

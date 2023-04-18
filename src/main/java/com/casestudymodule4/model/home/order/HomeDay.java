@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "homeDays")
+@Table(name = "homeDays", uniqueConstraints = {@UniqueConstraint(columnNames = {"status_id", "day"})})
 public class HomeDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,14 @@ public class HomeDay {
     private Status status;
     @NotBlank
     private LocalDate day;
+
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "home_id")
     private Home home;
+
+    public HomeDay() {
+    }
 
     public Home getHome() {
         return home;
@@ -27,15 +32,6 @@ public class HomeDay {
 
     public void setHome(Home home) {
         this.home = home;
-    }
-
-    public HomeDay() {
-    }
-
-    public HomeDay(Long id, Status status, LocalDate day) {
-        this.id = id;
-        this.status = status;
-        this.day = day;
     }
 
     public Long getId() {

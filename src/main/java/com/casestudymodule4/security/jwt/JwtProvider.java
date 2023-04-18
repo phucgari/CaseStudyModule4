@@ -1,19 +1,25 @@
 package com.casestudymodule4.security.jwt;
 
+import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.security.principle.UserPrinciple;
+import com.casestudymodule4.service.user.IUserService;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Component
 public class JwtProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
     private final String jwtSecret ="12481632641282565121024204840968192163843276865536";
     private final int jwtExpiration = 86400;
+    @Autowired
+    private IUserService userService;
 
     public String createToken(Authentication authentication) {
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
@@ -43,5 +49,12 @@ public class JwtProvider {
 
     public String getUsernameFromToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    }
+    public Optional<User> getUserFromBearer(String authorization){
+        String token=authorization != null && authorization.startsWith("Bearer")?
+                authorization.replace("Bearer", "") :
+                null;
+        String username= getUsernameFromToken(token);
+        return userService.findByUsername(username);
     }
 }
