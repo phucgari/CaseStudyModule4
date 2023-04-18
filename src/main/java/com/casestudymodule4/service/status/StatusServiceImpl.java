@@ -36,11 +36,11 @@ public class StatusServiceImpl implements IStatusService {
     public Optional<Status> findByName(String name) {
         switch (name) {
             case "free":
-                return iStatusRepository.findByName(Status.StatusType.Free);
+                return iStatusRepository.findByName(Status.StatusType.FREE);
             case "ordered":
-                return iStatusRepository.findByName(Status.StatusType.Ordered);
+                return iStatusRepository.findByName(Status.StatusType.ORDERED);
             case "fixing":
-                return iStatusRepository.findByName(Status.StatusType.Fixing);
+                return iStatusRepository.findByName(Status.StatusType.FIXING);
         }
         throw new RuntimeException("invalid status");
     }

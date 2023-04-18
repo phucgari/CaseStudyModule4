@@ -6,7 +6,7 @@ import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.service.IGeneralService;
 import org.springframework.data.jpa.repository.Query;
 
-public interface IOderService extends IGeneralService<Order> {
+public interface IOrderService extends IGeneralService<Order> {
     Iterable<Order> findAllByOrderer(User user);
 
     Iterable<MonthMoneyTable> printMonthMoneyTableByOwner(User owner);

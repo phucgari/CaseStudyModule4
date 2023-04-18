@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-public class OrderService implements IOderService{
+public class OrderService implements IOrderService{
     @Autowired
     IOrderRepository repository;
     @Override

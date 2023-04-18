@@ -3,6 +3,7 @@ package com.casestudymodule4.controller.order;
 import com.casestudymodule4.model.DTO.MonthMoneyTable;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.user.User;
+import com.casestudymodule4.service.order.IOrderService;
 import com.casestudymodule4.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("order")
 public class OrderController {
     @Autowired
-    OrderService service;
+    IOrderService service;
     @GetMapping("all")
     public ResponseEntity<Iterable<Order>> getAllOrder(){
         return ResponseEntity.ok(service.findAll());
