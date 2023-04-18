@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface IHomeDayService extends IGeneralService<HomeDay> {
     List<HomeDay> findAllByDayBetweenAndHome(String year, String month, Home home);
 
-    Optional<HomeDay> findByDayAndHomeId(LocalDate date , Long homeId);
+    Optional<HomeDay> findByDayAndHome(LocalDate date , Home home);
 }
