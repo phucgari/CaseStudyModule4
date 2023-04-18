@@ -1,6 +1,7 @@
 package com.casestudymodule4.model.home.order;
 
 import com.casestudymodule4.model.home.Home;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,6 +22,7 @@ public class HomeDay {
     @NotBlank
     @ManyToOne
     @JoinColumn(name = "home_id")
+    @JsonBackReference
     private Home home;
 
     public HomeDay() {

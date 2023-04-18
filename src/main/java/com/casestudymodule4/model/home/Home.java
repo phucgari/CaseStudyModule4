@@ -7,6 +7,7 @@ import com.casestudymodule4.model.home.rating.Comment;
 import com.casestudymodule4.model.home.rating.Rating;
 import com.casestudymodule4.model.home.type.HomeType;
 import com.casestudymodule4.model.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,6 +36,7 @@ public class Home {
     private User owner;
     @OneToMany
     @JoinColumn(name="home_id")
+    @JsonManagedReference
     private Set<HomeDay> orderDay;
     @OneToMany
     @JoinColumn(name = "home_id")
