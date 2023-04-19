@@ -58,13 +58,16 @@ public class HomeController {
         home.setOwner(optionalUser.get());
         return new ResponseEntity<>(iHomeService.save(home), HttpStatus.CREATED);
     }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<Home> updateHome(@PathVariable Long id, @RequestBody Home home) {
         iHomeService.save(home);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @GetMapping("/home/owner/{id}")
+    public ResponseEntity<Home> findById(@PathVariable Long id){
+        Optional<Home> byId = iHomeService.findById(id);
+        return ResponseEntity.ok(byId.get());
+    }
     @DeleteMapping({"/{id}"})
     public ResponseEntity<Home> deleteById(@PathVariable Long id) {
         iHomeService.remove(id);
