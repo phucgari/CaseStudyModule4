@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class HomeController {
     @Autowired
     private IPictureService pictureService;
 
-    @GetMapping("")
+    @GetMapping("/search")
     public ResponseEntity<Iterable<Home>> findAllWithComplexSearch(Optional<Integer> minNumberOfBathroom,
                                                                    Optional<Integer> maxNumberOfBathroom,
                                                                    Optional<Integer> minNumberOfBedroom,
@@ -37,7 +38,7 @@ public class HomeController {
                                                                    Optional<Double> priceMax,
                                                                    Optional<LocalDate> minDate,
                                                                    Optional<LocalDate> maxDate) {
-        return new ResponseEntity<>(iHomeService.complexSearch(
+        List<Home> homes = iHomeService.complexSearch(
                 minNumberOfBathroom,
                 maxNumberOfBathroom,
                 minNumberOfBedroom,
@@ -46,7 +47,17 @@ public class HomeController {
                 priceMin,
                 priceMax,
                 minDate,
-                maxDate), HttpStatus.OK);
+                maxDate);
+        return new ResponseEntity<>(homes, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Iterable<Home>> showListHome() {
+        List<Home> homes = (List<Home>) iHomeService.findAll();
+        if (homes.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(homes, HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<Home> createNewHome(@RequestBody Home home,
@@ -79,7 +90,7 @@ public class HomeController {
         Optional<Home> byId = iHomeService.findById(id);
         return ResponseEntity.ok(byId.get());
     }
-    @DeleteMapping({"/{id}"})
+    @DeleteMapping({"/delete/{id}"})
     public ResponseEntity<Home> deleteById(@PathVariable Long id) {
         iHomeService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);

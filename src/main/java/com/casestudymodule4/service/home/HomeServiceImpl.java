@@ -48,7 +48,7 @@ public class HomeServiceImpl implements IHomeService {
             Optional<Double> priceMax,
             Optional<LocalDate> minDate,
             Optional<LocalDate> maxDate) {
-        List<Home> homes= iHomeRepository.searchAllByNumberOfBathroomBetweenAndNumberOfBedroomBetweenAndAddressLikeIgnoreCaseAndPriceBetween(
+        List<Home> homes= iHomeRepository.findAllByNumberOfBathroomBetweenAndNumberOfBedroomBetweenAndAddressContainingAndPriceBetween(
                 minNumberOfBathroom,
                 maxNumberOfBathroom,
                 minNumberOfBedroom,

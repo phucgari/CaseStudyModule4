@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -150,6 +151,11 @@ public class Home {
     }
 
     public Set<Picture> getPictures() {
+        if(pictures==null){
+            HashSet<Picture>set=new HashSet<>();
+            set.add(new Picture());
+            return set;
+        }
         return pictures;
     }
 
