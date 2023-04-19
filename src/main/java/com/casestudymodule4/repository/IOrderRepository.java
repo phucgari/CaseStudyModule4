@@ -11,11 +11,15 @@ import org.springframework.stereotype.Repository;
 public interface IOrderRepository extends JpaRepository<Order,Long> {
     Iterable<Order> findAllByOrderer(User user);
     @Query(nativeQuery = true,
-            value = "select Count(Home_days)*homes.price as money,month " +
-                    "from home_days " +
-                    "join homes on home_day.home_id=homes.id " +
-                    "join users on users.id=home.user_id " +
-                    "GROUP BY DATE_FORMAT(day,'%Y-%m') as month where users.id=?1"
+            value = "select sum(money) as money,month\n" +
+                    "from\n" +
+                    "(select count(day)*price as money,DATE_FORMAT(day,'%Y-%m') as month\n" +
+                    "from home_days\n" +
+                    "join homes on home_days.home_id=homes.id\n" +
+                    "join users on users.id=homes.user_id\n" +
+                    "where users.id=?1\n" +
+                    "GROUP BY homes.id,DATE_FORMAT(day,'%Y-%m')) as subquery\n" +
+                    "GROUP BY month"
     )
     Iterable<MonthMoneyTable> printMonthMoneyTableByOwner(Long owner_id);
 }
