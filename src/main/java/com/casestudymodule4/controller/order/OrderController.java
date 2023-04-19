@@ -3,6 +3,7 @@ package com.casestudymodule4.controller.order;
 import com.casestudymodule4.model.DTO.MonthMoneyTable;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.user.User;
+import com.casestudymodule4.security.jwt.JwtProvider;
 import com.casestudymodule4.service.order.IOrderService;
 import com.casestudymodule4.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("order")
+@CrossOrigin
 public class OrderController {
     @Autowired
     IOrderService service;
+    @Autowired
+    JwtProvider jwtProvider;
     @GetMapping("all")
     public ResponseEntity<Iterable<Order>> getAllOrder(){
         return ResponseEntity.ok(service.findAll());
@@ -47,8 +51,9 @@ public class OrderController {
     public ResponseEntity<Iterable<Order>> findByOrderer(@PathVariable User user){
         return ResponseEntity.ok(service.findAllByOrderer(user));
     }
-    @GetMapping("owner/{user}")
-    public ResponseEntity<Iterable<MonthMoneyTable>> printMonthMoneyTableByOwner(@PathVariable User user){
+    @GetMapping("owner")
+    public ResponseEntity<Iterable<MonthMoneyTable>> printMonthMoneyTableByOwner(@RequestHeader(name = "Authorization") String authHeader){
+        User user=jwtProvider.getUserFromBearer(authHeader).get();
         return ResponseEntity.ok(service.printMonthMoneyTableByOwner(user));
     }
     @PostMapping("checkin/{order}")
