@@ -6,5 +6,5 @@ import com.casestudymodule4.service.IGeneralService;
 import java.util.Optional;
 
 public interface IStatusService extends IGeneralService<Status> {
-    Optional<Status> findByName(String name);
+    Optional<Status> findByName(Status.StatusType name);
 }

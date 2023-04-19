@@ -28,23 +28,23 @@ public class Home {
     private int numberOfBedroom;
     private String description;
     private Double price;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private Set<Picture> pictures;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name="home_id")
     @JsonManagedReference
     private Set<HomeDay> orderDay;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private List<Order> orderList;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name="home_id")
     private Set<Rating> ratings;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private Set<Comment> comments;
 

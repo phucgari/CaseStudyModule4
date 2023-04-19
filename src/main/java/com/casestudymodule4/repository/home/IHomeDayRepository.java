@@ -15,5 +15,5 @@ public interface IHomeDayRepository extends JpaRepository<HomeDay, Long> {
 
     List<HomeDay> findAllByDayBetweenAndHome(@NotBlank LocalDate from, @NotBlank LocalDate to, @NotBlank Home home);
 
-    Optional<HomeDay> findByDayAndHomeId(LocalDate day, Long id);
+    Optional<HomeDay> findByDayAndHome(@NotBlank LocalDate day, @NotBlank Home home);
 }
