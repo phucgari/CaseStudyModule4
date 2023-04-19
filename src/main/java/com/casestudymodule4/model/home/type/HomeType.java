@@ -15,7 +15,7 @@ public class HomeType {
     private TypeName name;
 
     public enum TypeName {
-        SingleRoom, DoubleRoom, PresidentRoom, VIPRoom, LuxuryRoom
+        SINGLEROOM, DOUBLEROOM, PRESIDENTROOM, VIPROOM, LUXURYROOM
     }
 
     public HomeType() {
