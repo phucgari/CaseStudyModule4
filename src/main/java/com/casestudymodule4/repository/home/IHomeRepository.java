@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface IHomeRepository extends JpaRepository<Home, Long> {
-    List<Home> searchAllByNumberOfBathroomBetweenAndNumberOfBedroomBetweenAndAddressLikeIgnoreCaseAndPriceBetween
+    List<Home> findAllByNumberOfBathroomBetweenAndNumberOfBedroomBetweenAndAddressContainingAndPriceBetween
             (Optional<Integer> minNumberOfBathroom,
              Optional<Integer> maxNumberOfBathroom,
              Optional<Integer> minNumberOfBedroom,
