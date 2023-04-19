@@ -1,10 +1,12 @@
 package com.casestudymodule4.controller.home;
 
 import com.casestudymodule4.model.home.Home;
+import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.user.Role;
 import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.security.jwt.JwtProvider;
 import com.casestudymodule4.service.home.IHomeService;
+import com.casestudymodule4.service.picture.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ public class HomeController {
     private IHomeService iHomeService;
     @Autowired
     private JwtProvider jwtProvider;
+    @Autowired
+    private IPictureService pictureService;
 
     @GetMapping("")
     public ResponseEntity<Iterable<Home>> findAllWithComplexSearch(Optional<Integer> minNumberOfBathroom,
@@ -44,7 +48,7 @@ public class HomeController {
                 minDate,
                 maxDate), HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Home> createNewHome(@RequestBody Home home,
                                               @RequestHeader(name = "Authorization") String authHeader) {
         Optional<User> optionalUser=jwtProvider.getUserFromBearer(authHeader);
@@ -55,8 +59,15 @@ public class HomeController {
             if(role.getName()== Role.RoleType.USER)
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+
         home.setOwner(optionalUser.get());
-        return new ResponseEntity<>(iHomeService.save(home), HttpStatus.CREATED);
+        Home saved = iHomeService.save(home);
+        for (Picture pic :
+                home.getPictures()) {
+            pictureService.save(pic);
+        }
+        home.setOwner(optionalUser.get());
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<Home> updateHome(@PathVariable Long id, @RequestBody Home home) {

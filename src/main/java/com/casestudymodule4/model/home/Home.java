@@ -1,12 +1,13 @@
 package com.casestudymodule4.model.home;
 
 import com.casestudymodule4.model.home.order.HomeDay;
-import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.home.order.Order;
 import com.casestudymodule4.model.home.rating.Comment;
 import com.casestudymodule4.model.home.rating.Rating;
 import com.casestudymodule4.model.home.type.HomeType;
+import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -14,13 +15,18 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "homes")
+@Table(name = "homes", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name"})
+})
 public class Home {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "homes_types",
+            joinColumns = @JoinColumn(name = "home_id"),
+            inverseJoinColumns = @JoinColumn(name = "types_id"))
     private Set<HomeType> types;
 
     private String address;
@@ -30,19 +36,21 @@ public class Home {
     private Double price;
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
+    @JsonManagedReference
     private Set<Picture> pictures;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User owner;
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name="home_id")
+    @JoinColumn(name = "home_id")
     @JsonManagedReference
     private Set<HomeDay> orderDay;
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
     private List<Order> orderList;
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name="home_id")
+    @JoinColumn(name = "home_id")
     private Set<Rating> ratings;
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
