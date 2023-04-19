@@ -20,7 +20,10 @@ public class Home {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "homes_types",
+            joinColumns = @JoinColumn(name = "home_id"),
+            inverseJoinColumns = @JoinColumn(name = "types_id"))
     private Set<HomeType> types;
 
     private String address;

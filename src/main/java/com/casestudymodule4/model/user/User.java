@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,8 +32,7 @@ public class User {
     @Size(min = 6, max = 32)
     private String username;
 
-    @JsonIgnore
-    @NotBlank
+    @NotNull
     @Size(min = 6, max = 8)
     private String password;
 
