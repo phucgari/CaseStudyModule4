@@ -1,11 +1,13 @@
 package com.casestudymodule4.controller.home;
 
 import com.casestudymodule4.model.home.Home;
+import com.casestudymodule4.model.home.type.HomeType;
 import com.casestudymodule4.model.picture.Picture;
 import com.casestudymodule4.model.user.Role;
 import com.casestudymodule4.model.user.User;
 import com.casestudymodule4.security.jwt.JwtProvider;
 import com.casestudymodule4.service.home.IHomeService;
+import com.casestudymodule4.service.hometype.IHomeTypeService;
 import com.casestudymodule4.service.picture.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,6 +29,8 @@ public class HomeController {
     private JwtProvider jwtProvider;
     @Autowired
     private IPictureService pictureService;
+    @Autowired
+    private IHomeTypeService homeTypeService;
 
     @GetMapping("")
     public ResponseEntity<Iterable<Home>> findAllWithComplexSearch(Optional<Integer> minNumberOfBathroom,
@@ -59,13 +64,15 @@ public class HomeController {
             if(role.getName()== Role.RoleType.USER)
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
-
+        Set<HomeType>homeTypes=new HashSet<>();
+        for (HomeType hometype :
+                home.getTypes()) {
+            HomeType homeType=homeTypeService.findByName(hometype.getName());
+            homeTypes.add(homeType);
+        }
+        home.setTypes(homeTypes);
         home.setOwner(optionalUser.get());
         Home saved = iHomeService.save(home);
-        for (Picture pic :
-                home.getPictures()) {
-            pictureService.save(pic);
-        }
         home.setOwner(optionalUser.get());
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
