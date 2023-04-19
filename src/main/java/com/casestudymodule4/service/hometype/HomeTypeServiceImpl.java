@@ -33,19 +33,7 @@ public class HomeTypeServiceImpl implements IHomeTypeService {
     }
 
     @Override
-    public Optional<HomeType> findByName(String name) {
-        switch (name) {
-            case "villa":
-                return iHomeTypeRepository.findByName(HomeType.TypeName.SINGLEROOM);
-            case "apartment":
-                return iHomeTypeRepository.findByName(HomeType.TypeName.DOUBLEROOM);
-            case "motel":
-                return iHomeTypeRepository.findByName(HomeType.TypeName.PRESIDENTROOM);
-                case "vip":
-                return iHomeTypeRepository.findByName(HomeType.TypeName.VIPROOM);
-            case "luxury":
-                return iHomeTypeRepository.findByName(HomeType.TypeName.LUXURYROOM);
-        }
-        throw new RuntimeException("invalid hometype");
+    public HomeType findByName(HomeType.TypeName name) {
+        return iHomeTypeRepository.findByName(name).get();
     }
 }

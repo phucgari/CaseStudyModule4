@@ -37,9 +37,4 @@ public class HomeTypeController {
         this.iHomeTypeService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    @PostMapping("findByName/{name}")
-    public ResponseEntity<Optional<HomeType>> findByName(@PathVariable String name) {
-        return new ResponseEntity<>(this.iHomeTypeService.findByName(name), HttpStatus.OK);
-    }
 }

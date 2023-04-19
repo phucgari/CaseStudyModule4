@@ -6,5 +6,5 @@ import com.casestudymodule4.service.IGeneralService;
 import java.util.Optional;
 
 public interface IHomeTypeService extends IGeneralService<HomeType> {
-    Optional<HomeType> findByName(String name);
+    HomeType findByName(HomeType.TypeName homeType);
 }
