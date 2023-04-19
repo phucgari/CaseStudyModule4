@@ -53,18 +53,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     Set<Role> roles = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    Set<Home> home;
-
-    public Set<Home> getHome() {
-        return home;
-    }
-
-    public void setHome(Set<Home> home) {
-        this.home = home;
-    }
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id")
+//    Set<Home> home;
+//
+//    public Set<Home> getHome() {
+//        return home;
+//    }
+//
+//    public void setHome(Set<Home> home) {
+//        this.home = home;
+//    }
 
     public User() {
     }

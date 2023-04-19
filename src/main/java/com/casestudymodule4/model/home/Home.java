@@ -41,7 +41,6 @@ public class Home {
     private Set<Picture> pictures;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
     private User owner;
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "home_id")
