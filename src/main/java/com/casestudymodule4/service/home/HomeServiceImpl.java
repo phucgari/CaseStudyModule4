@@ -55,7 +55,7 @@ public class HomeServiceImpl implements IHomeService {
         int minBath=minNumberOfBathroom.orElse(0);
         int maxBath=maxNumberOfBathroom.orElse(100);
         int minBed=minNumberOfBedroom.orElse(0);
-        int maxBed=minNumberOfBedroom.orElse(100);
+        int maxBed=maxNumberOfBedroom.orElse(100);
         String add=address.orElse("");
         Double minPrice=priceMin.orElse((double) 0);
         Double maxPrice=priceMax.orElse((double)100000000000000000L);
