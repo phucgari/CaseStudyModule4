@@ -4,6 +4,7 @@ import com.casestudymodule4.model.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotNull
     private LocalDateTime orderTime;
     @ManyToOne
     @JoinColumn(name ="user_id")

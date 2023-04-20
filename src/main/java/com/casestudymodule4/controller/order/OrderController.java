@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -31,8 +32,13 @@ public class OrderController {
         return optionalOrder.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     @PostMapping("create")
-    public ResponseEntity<Order> createOrder(@RequestBody Order order){
+    public ResponseEntity<Order> createOrder(@RequestBody Order order, @RequestHeader(name = "Authorization") String beare){
         if(order.getId()!=null) return new ResponseEntity<>(HttpStatus.CONFLICT);
+        User user = jwtProvider.getUserFromBearer(beare).get();
+        if(order.getId()!=null) return new ResponseEntity<>(HttpStatus.CONFLICT);
+
+        order.setOrderer(user);
+        order.setOrderTime(LocalDateTime.now());
         return ResponseEntity.ok(service.save(order));
     }
     @PutMapping("update")
