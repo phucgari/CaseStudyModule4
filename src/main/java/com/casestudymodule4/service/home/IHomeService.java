@@ -18,4 +18,6 @@ public interface IHomeService extends IGeneralService<Home> {
              Optional<Double> priceMax,
              Optional<LocalDate> minDate,
              Optional<LocalDate> maxDate);
+
+    Iterable<Home> showTopFiveRental();
 }

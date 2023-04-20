@@ -80,4 +80,9 @@ public class HomeServiceImpl implements IHomeService {
         }
         return result;
     }
+
+    @Override
+    public Iterable<Home> showTopFiveRental() {
+        return iHomeRepository.showTopFiveRental();
+    }
 }

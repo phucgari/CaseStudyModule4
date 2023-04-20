@@ -104,4 +104,9 @@ public class HomeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/showTopHome")
+    public ResponseEntity<Iterable<Home>> showTopFiveHomeRentals() {
+        List<Home> homes = (List<Home>) iHomeService.showTopFiveRental();
+        return new ResponseEntity<>(homes, HttpStatus.OK);
+    }
 }
