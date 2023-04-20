@@ -1,7 +1,10 @@
 package com.casestudymodule4.model.user;
 
+import com.casestudymodule4.model.home.Home;
 import com.casestudymodule4.model.picture.Picture;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -49,6 +52,18 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     Set<Role> roles = new HashSet<>();
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id")
+//    Set<Home> home;
+//
+//    public Set<Home> getHome() {
+//        return home;
+//    }
+//
+//    public void setHome(Set<Home> home) {
+//        this.home = home;
+//    }
 
     public User() {
     }

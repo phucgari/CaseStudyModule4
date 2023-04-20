@@ -1,5 +1,8 @@
 package com.casestudymodule4.model.picture;
 
+import com.casestudymodule4.model.home.Home;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 
@@ -10,6 +13,18 @@ public class Picture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String src;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "home_id")
+    @JsonBackReference
+    private Home home;
+
+    public Home getHome() {
+        return home;
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
+    }
 
     public Picture() {
     }
