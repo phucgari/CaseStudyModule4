@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "homeDays", uniqueConstraints = {@UniqueConstraint(columnNames = {"status_id", "day"})})
+@Table(name = "homeDays", uniqueConstraints = {@UniqueConstraint(columnNames = {"home_id", "day"})})
 public class HomeDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,6 @@ public class HomeDay {
     @JoinColumn(name = "home_id")
     @JsonBackReference
     private Home home;
-
     public HomeDay() {
     }
 
