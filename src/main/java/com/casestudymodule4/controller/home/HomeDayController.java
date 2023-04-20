@@ -54,7 +54,7 @@ public class HomeDayController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<HomeDay> deleteById(@PathVariable Long id) {
         this.iHomeDayService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -66,12 +66,17 @@ public class HomeDayController {
         Optional<Home> optionalHome=iHomeService.findById(homeId);
         if(optionalHome.isEmpty())return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         Home home=optionalHome.get();
-        Optional<HomeDay> homeDaySearch = this.iHomeDayService.findByDayAndHome(day, home);
+        Optional<HomeDay> homeDaySearch = iHomeDayService.findByDayAndHome(day, home);
         Status status = iStatusService.findByName(homeDay.getStatus().getName()).get();
         if (homeDaySearch.isPresent()) {
-            HomeDay updateHomeDay=homeDaySearch.get();
-            updateHomeDay.setStatus(status);
-            return update(updateHomeDay);
+            if(status.getName()== Status.StatusType.FREE){
+                return deleteById(homeDaySearch.get().getId());
+            }
+                else{
+                HomeDay updateHomeDay = homeDaySearch.get();
+                updateHomeDay.setStatus(status);
+                return update(updateHomeDay);
+            }
         } else {
             homeDay.setStatus(status);
             return create(homeDay);

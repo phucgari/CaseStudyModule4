@@ -19,7 +19,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name ="user_id")
     private User orderer;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name="order_id")
     private Set<HomeDay> homeDays;
 
