@@ -13,12 +13,13 @@ public interface IOrderRepository extends JpaRepository<Order,Long> {
     @Query(nativeQuery = true,
             value = "select sum(money) as money,month\n" +
                     "from\n" +
-                    "(select count(day)*price as money,DATE_FORMAT(day,'%Y-%m') as month\n" +
-                    "from home_days\n" +
-                    "join homes on home_days.home_id=homes.id\n" +
-                    "join users on users.id=homes.user_id\n" +
-                    "where users.id=?1\n" +
-                    "GROUP BY homes.id,DATE_FORMAT(day,'%Y-%m')) as subquery\n" +
+                    "    (select count(day)*price as money,DATE_FORMAT(day,'%Y-%m') as month\n" +
+                    "     from home_days\n" +
+                    "         join status on home_days.status_id = status.id\n" +
+                    "         join homes on home_days.home_id=homes.id\n" +
+                    "         join users on users.id=homes.user_id\n" +
+                    "     where users.id=?1 and status.name like 'ORDERED'\n" +
+                    "     GROUP BY homes.id,DATE_FORMAT(day,'%Y-%m')) as subquery\n" +
                     "GROUP BY month"
     )
     Iterable<MonthMoneyTable> printMonthMoneyTableByOwner(Long owner_id);
