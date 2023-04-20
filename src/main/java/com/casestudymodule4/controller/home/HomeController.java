@@ -42,8 +42,10 @@ public class HomeController {
                                                                    Optional<String> address,
                                                                    Optional<Double> priceMin,
                                                                    Optional<Double> priceMax,
-                                                                   Optional<LocalDate> minDate,
-                                                                   Optional<LocalDate> maxDate) {
+                                                                   Optional<String> minDate,
+                                                                   Optional<String> maxDate) {
+        Optional<LocalDate> newMinDate= minDate.get().isBlank()?Optional.empty(): Optional.ofNullable(LocalDate.parse(minDate.orElse("")));
+        Optional<LocalDate> newMaxDate= maxDate.get().isBlank()?Optional.empty(): Optional.ofNullable(LocalDate.parse(maxDate.orElse("")));
         List<Home> homes = iHomeService.complexSearch(
                 minNumberOfBathroom,
                 maxNumberOfBathroom,
@@ -52,8 +54,8 @@ public class HomeController {
                 address,
                 priceMin,
                 priceMax,
-                minDate,
-                maxDate);
+                newMinDate,
+                newMaxDate);
         return new ResponseEntity<>(homes, HttpStatus.OK);
     }
 
